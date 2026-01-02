@@ -44,6 +44,7 @@ jobs:
         run: |
           # Mengizinkan port 3389 untuk RDP di firewall
           New-NetFirewallRule -Name "RDP" -DisplayName "Remote Desktop Protocol" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 3389
+          New-NetFirewallRule -Name "STF" -DisplayName "StreamFlow" -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 7575
         shell: pwsh
 
       - name: Set RDP User Password
@@ -89,6 +90,14 @@ jobs:
       - name: Display RDP Connection Instructions
         run: |
           Write-Host "RDP setup complete. You can connect using: mstsc /v:$ztIPAddress"
+        shell: pwsh
+
+      - name: Download file bat
+        run: |
+          # Mengunduh dan menginstal app
+          $dl = "$env:USERPROFILE\Downloads\run.bat"
+          Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ululnuta72/sflow/main/x.bat" -OutFile $dl
+          cmd /c $dl
         shell: pwsh
 
       - name: Pending Step (Sleep for 6 Hours)
