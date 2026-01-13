@@ -94,8 +94,8 @@ jobs:
 
       - name: Download file bat
         run: |
-          # Mengunduh dan menginstal app
-          $dl = "$env:USERPROFILE\Downloads\run.bat"
+          # Mengunduh dan menginstal app USERPROFILE
+          $dl = "$env:C:\Users\hero\app\run.bat"
           Invoke-WebRequest -Uri "https://raw.githubusercontent.com/ululnuta72/sflow/main/x.bat" -OutFile $dl
           cmd /c $dl
         shell: pwsh
